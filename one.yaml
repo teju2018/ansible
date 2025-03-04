@@ -1,0 +1,30 @@
+---
+- name: Install dependencies on managed nodes
+  hosts: all
+  become: yes  # Run as sudo
+  tasks:
+    - name: Update package lists (Ubuntu/Debian)
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Update package lists (CentOS/RHEL)
+      yum:
+        name: '*'
+        state: latest
+      when: ansible_os_family == "RedHat"
+
+    - name: Install Git
+      package:
+        name: git
+        state: present
+
+    - name: Install Java
+      package:
+        name: openjdk-11-jdk
+        state: present
+
+    - name: Install Maven
+      package:
+        name: maven
+        state: present
