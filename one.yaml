@@ -1,6 +1,6 @@
 ---
 - name: Install dependencies on managed nodes
-  hosts: all
+  hosts: inventory.ini
   become: yes  # Run as sudo
   tasks:
     - name: Update package lists (Ubuntu/Debian)
